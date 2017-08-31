@@ -27,5 +27,11 @@
             <artifactId>httpclient</artifactId>
             <version>${http-client.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.grizzly</groupId>
+            <artifactId>grizzly-http-server</artifactId>
+            <version>2.4.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

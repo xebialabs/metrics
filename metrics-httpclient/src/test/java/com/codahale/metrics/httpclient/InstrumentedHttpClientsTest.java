@@ -8,12 +8,14 @@ import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -32,6 +34,9 @@ public class InstrumentedHttpClientsTest {
     private final HttpClient client =
             InstrumentedHttpClients.custom(metricRegistry, metricNameStrategy).disableAutomaticRetries().build();
 
+    @Rule
+    public HttpServer httpServer = new HttpServer();
+
     @Before
     public void setUp() throws Exception {
         metricRegistry.addListener(registryListener);
@@ -39,7 +44,7 @@ public class InstrumentedHttpClientsTest {
 
     @Test
     public void registersExpectedMetricsGivenNameStrategy() throws Exception {
-        final HttpGet get = new HttpGet("http://example.com?q=anything");
+        final HttpGet get = new HttpGet("http://localhost:8080?q=anything");
         final String metricName = "some.made.up.metric.name";
 
         when(metricNameStrategy.getNameFor(any(), any(HttpRequest.class)))
@@ -76,7 +81,7 @@ public class InstrumentedHttpClientsTest {
         try {
             client.execute(get);
             fail();
-        } catch (NoHttpResponseException expected) {
+        } catch (SocketException expected) {
             assertThat(metricRegistry.getMeters()).containsKey("exception");
         } finally {
             serverThread.interrupt();
