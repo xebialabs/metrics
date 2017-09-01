@@ -3,7 +3,7 @@
     <parent>
         <artifactId>metrics-parent</artifactId>
         <groupId>io.dropwizard.metrics</groupId>
-        <version>v4.0.0-alpha3-SNAPSHOT</version>
+        <version>4.0.0-alpha3+xebialabs.20170901</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
