@@ -7,7 +7,7 @@
 
     <groupId>io.dropwizard.metrics</groupId>
     <artifactId>metrics-parent</artifactId>
-    <version>4.0.0+xebialabs.201709281600</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Metrics Parent</name>
     <description>
@@ -99,7 +99,7 @@
         <connection>scm:git:git://github.com/xebialabs/metrics.git</connection>
         <developerConnection>scm:git:git@github.com:xebialabs/metrics.git</developerConnection>
         <url>http://github.com/xebialabs/metrics/</url>
-        <tag>v4.0.0+xebialabs.201709281600</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
